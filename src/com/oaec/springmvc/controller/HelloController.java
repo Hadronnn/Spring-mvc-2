@@ -41,6 +41,10 @@ public class HelloController {
         model.addAttribute("result",price);
         return "hello";
     }
+    @RequestMapping("/test")
+    public String test(){
+        return "hello";
+    }
     //统一异常处理
     /*@ExceptionHandler({NullPointerException.class})
     public ModelAndView exception1(Exception e){
