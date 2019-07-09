@@ -1,0 +1,14 @@
+异常处理
+    异常处理的方法
+        - 返回值：ModelAndView
+        - 参数：异常类
+        - 注解：@ExceptionHandler
+    - 针对单独Controller处理异常
+        可以在需要处理异常的Controller中添加异常处理方法
+    - 针对所有Controller处理异常
+        新建异常处理的Controller，添加@ControllerAdvice注解
+    - 针对某种异常danduchuli【两种方式】
+            第一种：在@ExceptionHandler注解中添加参数
+                @ExceptionHandler({NullPointerException.class})
+            第二种：将异常处理方法的参数设置为需要处理的异常
+                 public ModelAndView exception1(NullPointerException e){}
