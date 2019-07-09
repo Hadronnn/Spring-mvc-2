@@ -1,14 +1,18 @@
 package com.oaec.springmvc.controller;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
+
 @Controller
 public class HelloController {
-    @RequestMapping("test1")
+    @RequestMapping("/test1")
     public String test1(Integer num, Model model){
 //        try {
             int result = 10 / num;
@@ -19,10 +23,22 @@ public class HelloController {
 //            return "error/500";
 //        }
     }
-    @RequestMapping("test2")
+    @RequestMapping("/test2")
     public String test2(String name,Model model){
         int length = name.length();
         model.addAttribute("result",length);
+        return "hello";
+    }
+    @RequestMapping("/testDate")
+    //testDate?date=2019-07-09 11:15:00
+    public String testDate(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date date, Model model){
+        model.addAttribute("result",date);
+        return "hello";
+    }
+    @RequestMapping("/testNumber")
+    //testNumber?price=4,321,234.99
+    public String testNumber(@NumberFormat(pattern = "#,###,###.##") Double price, Model model){
+        model.addAttribute("result",price);
         return "hello";
     }
     //统一异常处理
