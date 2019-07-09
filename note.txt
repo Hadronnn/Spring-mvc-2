@@ -12,3 +12,9 @@
                 @ExceptionHandler({NullPointerException.class})
             第二种：将异常处理方法的参数设置为需要处理的异常
                  public ModelAndView exception1(NullPointerException e){}
+类型转换
+    注意：需要配置<mvc:annotation-driven/>
+    - 日期时间类型
+        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    - 数值类型
+        @NumberFormat(pattern = "#,###,###.##")
