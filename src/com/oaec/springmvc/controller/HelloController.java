@@ -26,8 +26,17 @@ public class HelloController {
         return "hello";
     }
     //统一异常处理
-    @ExceptionHandler
-    public ModelAndView exception(Exception e){
+    @ExceptionHandler({NullPointerException.class})
+    public ModelAndView exception1(Exception e){
+        System.out.println("HelloController.exception1");
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("error/500");
+        modelAndView.addObject("e",e);
+        return modelAndView;
+    }
+    @ExceptionHandler({ArithmeticException.class})
+    public ModelAndView exception2(Exception e){
+        System.out.println("HelloController.exception2");
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("error/500");
         modelAndView.addObject("e",e);
