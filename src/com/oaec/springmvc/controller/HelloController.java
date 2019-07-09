@@ -5,9 +5,12 @@ import org.springframework.format.annotation.NumberFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 
 @Controller
@@ -43,7 +46,54 @@ public class HelloController {
     }
     @RequestMapping("/test")
     public String test(){
+        System.out.println("HelloController.test");
         return "hello";
+    }
+    @RequestMapping("/login")
+    public String login(){
+        System.out.println("HelloController.login");
+        return "login";
+    }
+
+    @PostMapping("/doLogin")
+    public String doLogin(HttpServletRequest request,HttpSession session, String username, String password,String uri){
+        System.out.println("HelloController.doLogin");
+        if ("tom".equals(username) && "123456".equals(password)){
+            session.setAttribute("username",username);
+            if (uri != null){
+                String contextPath = request.getContextPath();
+                System.out.println("uri = " + uri);
+                uri = uri.replace(contextPath,"");
+                System.out.println("uri = " + uri);
+                return "redirect:"+uri;
+            }else{
+                return "redirect:/index";
+            }
+        }else{
+            return "redirect:/login";
+        }
+    }
+
+    @RequestMapping("/cart")
+    public String cart(){
+        return "cart";
+    }
+    @RequestMapping("/order")
+    public String order(){
+        return "order";
+    }
+    @RequestMapping("/product")
+    public String product(){
+        return "product";
+    }
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request){
+        request.getSession().removeAttribute("username");
+        return "index";
+    }
+    @RequestMapping("/index")
+    public String index(){
+        return "index";
     }
     //统一异常处理
     /*@ExceptionHandler({NullPointerException.class})

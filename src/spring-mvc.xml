@@ -17,7 +17,14 @@
     <mvc:annotation-driven/>
     <!--配置拦截器-->
     <mvc:interceptors>
-        <ref bean="firstInterceptor"/>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/login"/>
+            <mvc:exclude-mapping path="/doLogin"/>
+            <mvc:exclude-mapping path="/product"/>
+            <mvc:exclude-mapping path="/index"/>
+            <ref bean="loginInterceptor"/>
+        </mvc:interceptor>
     </mvc:interceptors>
     <!--配置CommonsMultipartResolver，需要Id-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
