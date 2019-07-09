@@ -26,7 +26,7 @@ public class HelloController {
         return "hello";
     }
     //统一异常处理
-    @ExceptionHandler({NullPointerException.class})
+    /*@ExceptionHandler({NullPointerException.class})
     public ModelAndView exception1(Exception e){
         System.out.println("HelloController.exception1");
         ModelAndView modelAndView = new ModelAndView();
@@ -41,5 +41,5 @@ public class HelloController {
         modelAndView.setViewName("error/500");
         modelAndView.addObject("e",e);
         return modelAndView;
-    }
+    }*/
 }
